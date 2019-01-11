@@ -44,14 +44,6 @@ parse_net(L) when is_list(L) ->
     {ok, Value} = erl_parse:parse_term(Tokens),
     Value.
 
-to_bin(Num) when is_integer(Num) -> integer_to_binary(Num);
-
-to_bin(Str) when is_list(Str) -> list_to_binary(Str);
-
-to_bin(Bin) when is_binary(Bin) -> Bin;
-
-to_bin(Atom) when is_atom(Atom) -> atom_to_binary(Atom, utf8).
-
 process_packet({Sock, Addr, Port, Packet}) ->
     V = parse_net(Packet),
     gen_udp:send(Sock, Addr, Port, to_bin(execute_cmd(V))).
@@ -59,8 +51,20 @@ process_packet({Sock, Addr, Port, Packet}) ->
 execute_cmd(["SET", Key, Value]) ->
     rets:set(db, Key, Value);
 execute_cmd(["GET", Key]) ->
-    rets:get(db, Key).
-    
+    rets:get(db, Key);
+execute_cmd(["HSET", Key, Field, Value]) ->
+    rets:hset(db, Key, Field, Value);
+execute_cmd(["HGET", Key, Field]) ->
+    rets:hget(db, Key, Field);
+execute_cmd(["HGETALL", Key]) ->
+    rets:hgetall(db, Key);
+execute_cmd(["DEL", Key]) ->
+    rets:del(db, Key).    
+
+to_bin(Num) when is_integer(Num) -> integer_to_binary(Num);
+to_bin(Str) when is_list(Str) -> list_to_binary(Str);
+to_bin(Bin) when is_binary(Bin) -> Bin;
+to_bin(Atom) when is_atom(Atom) -> atom_to_binary(Atom, utf8).
 
 -ifdef(EUNIT).
 -include_lib("eunit/include/eunit.hrl").
