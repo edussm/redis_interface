@@ -1,0 +1,12 @@
+[{<<"lagger">>,
+  {git,"https://github.com/basho/lager",
+       {ref,"d8ad5eb64a6dda296d8706aa2cd664a4a84e8129"}},
+  0},
+ {<<"reds">>,
+  {git,"https://github.com/xmppjingle/rets/",
+       {ref,"4b386c268021efc9f073de759dd72151cae1ab78"}},
+  0},
+ {<<"udp_channel">>,
+  {git,"https://github.com/edussm/udp_channel.git",
+       {ref,"61c191b9dc893d02ac73432291542a80a693742d"}},
+  0}].

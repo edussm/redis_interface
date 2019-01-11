@@ -1,0 +1,11 @@
+{application, redis_interface, [
+    {description, "Erlang UDP Redis Interface"},
+    {vsn, git},
+    {registered, []},
+    {applications, [kernel,
+                    stdlib]},
+    {env, []},
+    {maintainers, ["Eduardo Santos"]},
+    {licenses, ["Apache License 2.1"]},
+    {links, [{"Github", "https://github.com/edussm/redis_interface"}]}
+]}.
