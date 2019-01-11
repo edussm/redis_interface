@@ -69,7 +69,9 @@ to_bin(Atom) when is_atom(Atom) -> atom_to_binary(Atom, utf8).
 -ifdef(EUNIT).
 -include_lib("eunit/include/eunit.hrl").
 
-generate_times_test() ->
+parse_net_test() ->
+    V = parse_net(<<"[\"SET\", abc, {123,[],'122', #{p => q}}].">>),
+    ?assert(V == ["SET", abc, {123,[],'122', #{p => q}}]),
     ok.
 
 -endif.
